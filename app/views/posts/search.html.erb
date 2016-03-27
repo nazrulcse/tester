@@ -1,0 +1,19 @@
+<%= render 'welcome/search_form' %>
+<p>
+  Search result <b> <%= params[:term] %> </b>
+</p>
+<ul class="post">
+  <% @posts.results.each do |post| %>
+      <%= render 'posts/post', post: post %>
+  <% end %>
+</ul>
+
+<script type="text/javascript">
+    $(function () {
+        var options = {
+            exact: "exact",
+            keys: "<%= params[:term] %>"
+        };
+        $(document).SearchHighlight(options);
+    });
+</script>

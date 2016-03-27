@@ -1,0 +1,41 @@
+<h3> TinyMcy Editor: </h3>
+<%= tinymce_assets %>
+
+<div class="editor-panel">
+  <textarea class="sl-editor" row="300"> Test Editor </textarea>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        tinyMCE.init({
+            selector: 'textarea.sl-editor',
+            resizeIframe: function(frameid) {
+                console.log("Frame " + frameid);
+                var frameid = frameid ? frameid : this.editor.id+'_ifr';
+                var currentfr=document.getElementById(frameid);
+
+                if (currentfr && !window.opera){
+                    currentfr.style.display="block";
+                    if (currentfr.contentDocument && currentfr.contentDocument.body.offsetHeight) { //ns6 syntax
+                        currentfr.height = currentfr.contentDocument.body.offsetHeight + 26;
+                    }
+                    else if (currentfr.Document && currentfr.Document.body.scrollHeight) { //ie5+ syntax
+                        currentfr.height = currentfr.Document.body.scrollHeight;
+                    }
+                    styles = currentfr.getAttribute('style').split(';');
+                    for (var i=0; i<styles.length; i++) {
+                        if ( styles[i].search('height:') ==1 ){
+                            styles.splice(i,1);
+                            break;
+                        }
+                    };
+                    currentfr.setAttribute('style', styles.join(';'));
+                }
+            }
+        });
+
+        $('#mce_0_ifr').change(function () {
+            console.log("Changing text.................");
+        });
+    });
+</script>

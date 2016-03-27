@@ -13,8 +13,13 @@ development:
   <<: *default
   username: root
   password: password
-  database: test_design
+  database: test_demo_development
 
 # Warning: The database defined as "test" will be erased and
 # re-generated from your development database when you run "rake".
 # Do not set this db to the same as development or production.
+production:
+  <<: *default
+  database: test_demo_production
+  username: <%= ENV['DATABASE_USER'] %>
+  password: <%= ENV['DATABASE_PASSWORD'] %>
